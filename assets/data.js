@@ -129,8 +129,8 @@
       scope = sc;
       if (!DEMO) {
         await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js');
-        sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
-        sb.channel('nb-live').on('postgres_changes', { event: '*', schema: 'public' }, emit).subscribe();
+        sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, { db: { schema: CFG.SCHEMA || 'nutribites' } });
+        sb.channel('nb-live').on('postgres_changes', { event: '*', schema: CFG.SCHEMA || 'nutribites' }, emit).subscribe();
       }
     },
     suscribir(f) { listeners.add(f); return () => listeners.delete(f); }

@@ -5,6 +5,7 @@
 window.NB_CONFIG = {
   SUPABASE_URL: "",
   SUPABASE_ANON_KEY: "",
+  SCHEMA: "nutribites",          // schema de Postgres donde viven las tablas (debe estar en "Exposed schemas")
   CENTRO: [-1.2491, -78.6168],   // Ambato
   RADIO_LLEGADA_M: 150           // distancia máxima al cliente para validar la llegada
 };

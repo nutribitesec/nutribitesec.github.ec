@@ -10,15 +10,19 @@ Todo es HTML/JS estático (funciona en GitHub Pages). Mapa: OpenStreetMap + Leaf
 ## Modo demo (el que viene por defecto)
 Con `assets/config.js` vacío, los paneles funcionan con datos de ejemplo guardados en el navegador. Sirve para ver y aprobar el diseño. **No comparte datos entre dispositivos.**
 
-## Pasar a producción con Supabase (gratis para empezar)
-1. Crea un proyecto en https://supabase.com.
+## Pasar a producción con Supabase
+Las tablas viven en un schema propio (`nutribites`), así que el mismo proyecto de Supabase puede alojar otros proyectos sin mezclarse.
+1. Crea o elige tu proyecto en https://supabase.com.
 2. **SQL Editor** → pega todo `supabase/schema.sql` → Run.
-3. **Authentication → Users → Add user**: crea tu usuario (dueño) y uno por vendedor (correo + contraseña). Opcional: en *User metadata* agrega `{"nombre":"Carlos Mena"}`.
-4. En el SQL Editor vuelve a correr la última línea comentada de `schema.sql` (la de `update public.profiles set rol = 'admin'…`) con tu correo, para que tu usuario sea administrador. Los demás quedan como vendedores.
-5. **Project Settings → API**: copia *Project URL* y la clave *anon public* en `assets/config.js`.
-6. Sube los cambios a `main`. Entra a `/admin/`, carga tus clientes reales (o pídeme una importación desde Excel/CSV) y asigna las rutas.
+3. **Settings → API → Exposed schemas**: agrega `nutribites` y guarda.
+4. **Authentication → Users → Add user** (marca *Auto Confirm*): uno para el dueño y uno por vendedor.
+5. En el SQL Editor crea sus perfiles con `select nutribites.crear_perfil('correo','Nombre','admin'|'vendedor','telefono');` (ejemplos al final de `schema.sql`).
+6. **Settings → API**: copia *Project URL* y la clave *anon public* en `assets/config.js`.
+7. Sube los cambios a `main`.
 
-La clave `anon` es pública por diseño; la seguridad la dan las reglas RLS del esquema (cada vendedor solo ve y modifica lo suyo).
+Notas con varios proyectos en el mismo Supabase:
+- El login (`auth.users`) es compartido, pero solo entra a Nutribites quien tenga perfil en `nutribites.profiles`; las reglas RLS lo exigen.
+- El plan gratuito pausa el proyecto tras una semana sin actividad. Para un sistema de uso diario conviene el plan Pro.
 
 ## Uso diario
 1. El dueño abre **Asignar rutas**, elige vendedor, mueve el mapa a la zona y pulsa *Sugerir cercanos* (o toca puntos a mano), *Optimizar orden* y *Asignar ruta*.
