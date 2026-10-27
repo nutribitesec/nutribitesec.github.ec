@@ -9,7 +9,7 @@
   let scope = 'admin', sb = null;
 
   /* ───────────────────────── DEMO ───────────────────────── */
-  const KEY = 'nb_demo_v2';
+  const KEY = 'nb_demo_v3';
   const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 
   function seed() {
@@ -22,8 +22,8 @@
       return { id: 'c' + (i + 1), nombre: `${t} ${n}`, tipo: t, direccion: `Ambato · sector ${n}`, telefono: '09' + String(Math.floor(rnd() * 1e8)).padStart(8, '0'), lat: +(c0 + (rnd() - .5) * .07).toFixed(6), lng: +(c1 + (rnd() - .5) * .09).toFixed(6) };
     });
     const vendedores = [
-      { id: 'v1', nombre: 'Carlos Mena', color: NB.COLORES[0], rol: 'vendedor' },
-      { id: 'v2', nombre: 'Andrea Salazar', color: NB.COLORES[1], rol: 'vendedor' }
+      { id: 'v1', nombre: 'Carlos Mena', color: NB.COLORES[0], rol: 'vendedor', telefono: '0991112233' },
+      { id: 'v2', nombre: 'Andrea Salazar', color: NB.COLORES[1], rol: 'vendedor', telefono: '0992223344' }
     ];
     const productos = [
       { id: 'p1', nombre: 'Mix Premium 150 g', precio: 3.50, activo: true },
@@ -41,7 +41,7 @@
         if (i < hechas) {
           const t = new Date(); t.setHours(8, 10 + i * 24, 0, 0); if (t > new Date()) t.setTime(Date.now() - (hechas - i) * 600000);
           const compra = rnd() > .3;
-          Object.assign(p, { estado: compra ? 'visitado' : 'no_compra', llegada_at: t.toISOString(), llegada_lat: c.lat + (rnd() - .5) * .0004, llegada_lng: c.lng + (rnd() - .5) * .0004 });
+          Object.assign(p, { estado: compra ? 'visitado' : 'no_compra', llegada_at: t.toISOString(), llegada_lat: c.lat + (rnd() - .5) * .0004 + (v.id === 'v1' && i === 2 ? .0035 : 0), llegada_lng: c.lng + (rnd() - .5) * .0004 });
           p.distancia_m = Math.round(NB.dist([p.llegada_lat, p.llegada_lng], [c.lat, c.lng]));
           if (compra) {
             const items = productos.filter(() => rnd() > .45).map(x => ({ producto_id: x.id, nombre: x.nombre, precio: x.precio, cant: 1 + Math.floor(rnd() * 8) }));

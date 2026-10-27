@@ -5,8 +5,10 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   nombre text not null default '',
   rol text not null default 'vendedor' check (rol in ('admin','vendedor')),
-  color text not null default '#FF8C42'
+  color text not null default '#FF8C42',
+  telefono text
 );
+alter table public.profiles add column if not exists telefono text;
 
 create table if not exists public.clientes (
   id uuid primary key default gen_random_uuid(),
