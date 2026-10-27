@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0B">
+<title>Nutribites · Mi ruta</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  body{overflow:hidden}
+  #app{height:100dvh;display:flex;flex-direction:column}
+  .bar-top{padding:calc(10px + env(safe-area-inset-top)) 16px 12px;background:var(--s1);border-bottom:1px solid var(--line)}
+  .bar-top .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .bar-top .logo{font-size:16px}
+  .prog{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+  .prog b{font-size:26px;font-weight:800;letter-spacing:-.5px}
+  #mapa{flex:1 1 42%;min-height:200px}
+  .sheet{flex:1 1 58%;min-height:0;background:var(--bg);border-top:1px solid var(--line);overflow:auto;padding-bottom:env(safe-area-inset-bottom)}
+  .next{margin:12px;padding:16px;border-radius:14px;background:linear-gradient(135deg,rgba(255,140,66,.22),rgba(255,140,66,.06));border:1px solid rgba(255,140,66,.45)}
+  .next small{color:var(--or);font-weight:800;letter-spacing:1.4px;text-transform:uppercase;font-size:11px}
+  .next h2{font-size:19px;margin:4px 0 2px}
+  .stop{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #1b1b1b;cursor:pointer}
+  .stop:active{background:var(--s1)}
+  .stop .n{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;border:2px solid var(--or);color:var(--or)}
+  .stop .n.done{background:var(--gr);border-color:var(--gr);color:#06200f}
+  .stop .n.skip{background:var(--rd);border-color:var(--rd);color:#fff}
+  .stop .tx{flex:1;min-width:0}
+  .stop .tx b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stop .tx span{color:var(--mu);font-size:12px}
+  .full{position:fixed;inset:0;background:var(--bg);z-index:1500;display:flex;flex-direction:column}
+  .full .hd{display:flex;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;border-bottom:1px solid var(--line);background:var(--s1)}
+  .full .bd{flex:1;overflow:auto;padding:16px 16px calc(24px + env(safe-area-inset-bottom))}
+  .full .back{background:var(--s3);border:0;width:38px;height:38px;border-radius:10px;font-size:18px}
+  .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+  .btn.big{padding:15px;font-size:16px;border-radius:14px}
+  .prod{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #1d1d1d}
+  .prod .nm{flex:1;min-width:0}.prod .nm small{color:var(--mu);display:block}
+  .step{display:flex;align-items:center;gap:0}
+  .step button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--s2);font-size:20px;font-weight:700}
+  .step span{width:40px;text-align:center;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+  .tot{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;font-size:15px}
+  .tot b{font-size:28px;font-weight:800}
+  .info{background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+  .info.ok{border-color:rgba(61,220,132,.5);background:rgba(61,220,132,.07)}
+  .info.warn{border-color:rgba(255,200,61,.5);background:rgba(255,200,61,.07)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="../assets/vendor/leaflet/leaflet.js"></script>
+<script src="../assets/config.js"></script>
+<script src="../assets/common.js"></script>
+<script src="../assets/data.js"></script>
+<script src="../assets/login.js"></script>
+<script src="vendedor.js"></script>
+</body>
+</html>
